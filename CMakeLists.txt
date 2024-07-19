@@ -13,4 +13,5 @@ add_subdirectory(src)
 add_subdirectory(modules)
 add_subdirectory(test)
 
-
+# 安装规则
+install(DIRECTORY include/ DESTINATION include)
