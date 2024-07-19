@@ -16,3 +16,4 @@ if(BUILD_TESTING)
     include(GoogleTest)
     gtest_discover_tests(unit_tests)
 endif()
+
