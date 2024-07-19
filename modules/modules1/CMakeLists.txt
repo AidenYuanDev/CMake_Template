@@ -1,6 +1,11 @@
 # 添加静态库
-add_library(module1
-    src/module1.cpp
+add_library(module1 STATIC)
+
+target_sources(module1
+    PRIVATE
+        src/module1.cpp
+    PUBLIC
+        include/module1.h
 )
 
 target_include_directories(module1
@@ -12,4 +17,6 @@ target_include_directories(module1
 )
 
 # 测试
-add_subdirectory(test)
+if(BUILD_TESTING)
+    add_subdirectory(test)
+endif()
