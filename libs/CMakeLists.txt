@@ -1,6 +1,6 @@
 # 列出所有模块
 set(MODULES
-    modules1
+    noncopyable
     # 添加其他模块...
 )
 

@@ -9,8 +9,9 @@ include(ProjectSettings)
 include(FindDependencies)
 
 # 添加子目录
+add_subdirectory(libs)
+add_subdirectory(core)
 add_subdirectory(src)
-add_subdirectory(modules)
 add_subdirectory(test)
 
 # 安装规则
