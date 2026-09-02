@@ -1,3 +1,5 @@
+[![CI](https://github.com/AidenYuanDev/CMake_Template/actions/workflows/ci.yml/badge.svg)](https://github.com/AidenYuanDev/CMake_Template/actions/workflows/ci.yml)
+
 # 一、前言
 本节所以代码均可在[CMake_Template](https://github.com/AidenYuanDev/CMake_Template)仓库中找到。
 支持对不同模块进行`gtest`单元测试
