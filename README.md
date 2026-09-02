@@ -23,6 +23,32 @@ cd build && ctest --output-on-failure
 ```
 每个模块的单元测试放在自己的 `test/` 目录下（如 `core/add/test/`），跨模块的集成测试放在顶层 `test/`。
 
+## 安装
+```bash
+cmake -S . -B build
+cmake --build build
+cmake --install build --prefix /your/install/path
+```
+
+## 在别的项目中使用
+支持两种引入方式，**使用方写法完全一致**，都通过命名空间引用目标：
+
+```cmake
+# 方式一：作为子目录引入
+add_subdirectory(path/to/CMake_Template)
+
+# 方式二：安装后用 find_package 引入
+find_package(YourProjectName 1.0 REQUIRED)
+
+# 无论哪种方式，链接写法都一样
+target_link_libraries(your_app PRIVATE
+    YourProjectName::add
+    YourProjectName::sub)
+```
+
+作为子目录引入时，本项目不会改动上层项目的 `CMAKE_CXX_STANDARD`、输出目录和构建类型，
+不会构建自己的测试，也不会往上层项目里塞安装规则。
+
 # 二、为什么使用`CMake`?
 ## 1 跨平台
 CMake能够生成适用于多种平台（如Windows、Linux、macOS等）的构建系统（例如Makefile、Visual Studio项目、Xcode项目等）。这意味着开发者只需编写一次CMake配置文件，就可以在不同的平台上构建项目，而不必为每个平台单独编写构建脚本。
@@ -38,7 +64,10 @@ CMake的模块化和配置管理特性使得项目的配置文件更容易理解
 ```bash
 .
 ├── cmake
+│   ├── CompilerWarnings.cmake
+│   ├── Config.cmake.in
 │   ├── FindDependencies.cmake
+│   ├── InstallRules.cmake
 │   └── ProjectSettings.cmake
 ├── CMakeLists.txt
 ├── core
@@ -77,7 +106,10 @@ CMake的模块化和配置管理特性使得项目的配置文件更容易理解
 - **CMakeLists.txt:** CMake项目的核心配置文件，定义了项目的构建过程和规则。
 - **cmake:** 实现对主`CMakeLists.txt`的解耦。
 	
+	- **CompilerWarnings.cmake:** 警告选项，做成 INTERFACE 目标按编译器下发
+	- **Config.cmake.in:** `<Project>Config.cmake` 的模板，供 `find_package` 使用
 	- **FindDependencies.cmake:** 存放依赖
+	- **InstallRules.cmake:** 安装与导出规则
 	- **ProjectSettings.cmake:**存放项目设置
 - **core:** 核心模块，把原项目拆分为不同的子模块。
 	- **include:** 模块头文件

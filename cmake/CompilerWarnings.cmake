@@ -2,12 +2,12 @@
 #   1. 只作用于显式链接它的目标，不会波及 FetchContent 拉进来的第三方代码
 #   2. 按编译器分发，MSVC 不再收到一堆 GNU 风格的未知选项
 #
-# 用法：target_link_libraries(<target> PRIVATE project_warnings)
+# 用法：target_link_libraries(<target> PRIVATE ${PROJECT_NAME}_warnings)
 # 警告是构建期的事，不是使用要求，所以永远用 PRIVATE 链接。
 
 option(PROJECT_WARNINGS_AS_ERRORS "把编译警告当作错误" OFF)
 
-add_library(project_warnings INTERFACE)
+add_library(${PROJECT_NAME}_warnings INTERFACE)
 
 set(MSVC_WARNINGS
     /W4              # 合理的警告级别
@@ -59,4 +59,4 @@ else()
     set(PROJECT_WARNING_FLAGS "")
 endif()
 
-target_compile_options(project_warnings INTERFACE ${PROJECT_WARNING_FLAGS})
+target_compile_options(${PROJECT_NAME}_warnings INTERFACE ${PROJECT_WARNING_FLAGS})
