@@ -1,7 +1,7 @@
 include(FetchContent)
 
 # 只有构建测试时才拉取 GTest，避免默认构建也要求联网
-if(BUILD_TESTING)
+if(PROJECT_BUILD_TESTS)
   FetchContent_Declare(
     googletest
     GIT_REPOSITORY https://github.com/google/googletest.git

@@ -1,4 +1,5 @@
-cmake_minimum_required(VERSION 3.14)
+# 3.21 起提供 PROJECT_IS_TOP_LEVEL，用来区分顶层项目与被引入的子项目
+cmake_minimum_required(VERSION 3.21)
 project(YourProjectName VERSION 1.0.0 LANGUAGES CXX)
 
 # 包含自定义 CMake 模块
@@ -10,7 +11,7 @@ include(CompilerWarnings)
 include(FindDependencies)
 
 # 启用测试。必须在顶层调用，ctest 才能在构建根目录发现所有子目录的测试
-if(BUILD_TESTING)
+if(PROJECT_BUILD_TESTS)
   enable_testing()
 endif()
 
