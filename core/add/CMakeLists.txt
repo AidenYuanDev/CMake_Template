@@ -6,8 +6,11 @@ target_include_directories(add PUBLIC include/)
 target_sources(add PRIVATE 
     src/add.cpp)
 
-target_link_libraries(add PUBLIC
-  noncopyable)
+target_link_libraries(add
+  PUBLIC
+    noncopyable
+  PRIVATE
+    project_warnings)
 
 # 测试
 if(BUILD_TESTING)

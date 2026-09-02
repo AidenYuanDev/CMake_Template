@@ -16,8 +16,5 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
 set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
 
-# 添加编译选项
-add_compile_options(-Wall -Wextra -Wpedantic)
-
 #生成ycm可识别的json文件，让源文件找到头文件
 SET(CMAKE_EXPORT_COMPILE_COMMANDS ON )

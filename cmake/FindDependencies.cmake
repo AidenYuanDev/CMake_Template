@@ -19,6 +19,16 @@ if(BUILD_TESTING)
 
   FetchContent_MakeAvailable(googletest)
 
+  # 把 GTest 的头文件目录标记为 SYSTEM，这样链接了 project_warnings 的测试目标
+  # 不会因为第三方头文件里的写法而报警告（CMake 3.25+ 可直接用 FetchContent 的 SYSTEM 选项）
+  foreach(gtest_target gtest gtest_main)
+    get_target_property(gtest_incs ${gtest_target} INTERFACE_INCLUDE_DIRECTORIES)
+    if(gtest_incs)
+      set_target_properties(${gtest_target} PROPERTIES
+        INTERFACE_SYSTEM_INCLUDE_DIRECTORIES "${gtest_incs}")
+    endif()
+  endforeach()
+
   # 提供 gtest_discover_tests()，各模块的 test/ 直接用
   include(GoogleTest)
 endif()

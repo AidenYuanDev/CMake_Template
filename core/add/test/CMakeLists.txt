@@ -3,6 +3,7 @@ add_executable(add_test add_test.cpp)
 
 target_link_libraries(add_test PRIVATE
     GTest::gtest_main
-    add)
+    add
+    project_warnings)
 
 gtest_discover_tests(add_test)

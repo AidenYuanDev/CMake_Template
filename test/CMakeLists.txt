@@ -4,7 +4,8 @@ if(BUILD_TESTING)
     target_link_libraries(integration_test PRIVATE
         GTest::gtest_main
         add
-        sub)
+        sub
+        project_warnings)
 
     gtest_discover_tests(integration_test)
 endif()
