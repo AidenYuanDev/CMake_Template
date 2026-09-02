@@ -5,8 +5,7 @@ target_sources(${PROJECT_NAME} PRIVATE
 
 target_link_libraries(${PROJECT_NAME} PRIVATE
     add 
-    sub
-    noncopyable)
+    sub)
 
 # 根据构建类型设置选项
 target_compile_options(${PROJECT_NAME} PRIVATE

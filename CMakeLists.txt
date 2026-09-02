@@ -8,11 +8,13 @@ list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
 include(ProjectSettings)
 include(FindDependencies)
 
+# 启用测试。必须在顶层调用，ctest 才能在构建根目录发现所有子目录的测试
+if(BUILD_TESTING)
+  enable_testing()
+endif()
+
 # 添加子目录
 add_subdirectory(libs)
 add_subdirectory(core)
 add_subdirectory(src)
 add_subdirectory(test)
-
-# 安装规则
-install(DIRECTORY include/ DESTINATION include)

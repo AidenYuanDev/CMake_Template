@@ -6,7 +6,7 @@ target_include_directories(add PUBLIC include/)
 target_sources(add PRIVATE 
     src/add.cpp)
 
-target_link_libraries(add PRIVATE
+target_link_libraries(add PUBLIC
   noncopyable)
 
 # 测试

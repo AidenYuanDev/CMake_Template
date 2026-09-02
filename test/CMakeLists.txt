@@ -1,18 +1,10 @@
 if(BUILD_TESTING)
-    enable_testing()
+    add_executable(integration_test integration_test.cpp)
 
-    add_executable(unit_tests
-        test_module1.cpp
-        test_module2.cpp
-    )
+    target_link_libraries(integration_test PRIVATE
+        GTest::gtest_main
+        add
+        sub)
 
-    target_link_libraries(unit_tests
-        PRIVATE
-            GTest::gtest_main
-            module1
-            module2
-    )
-
-    include(GoogleTest)
-    gtest_discover_tests(unit_tests)
+    gtest_discover_tests(integration_test)
 endif()

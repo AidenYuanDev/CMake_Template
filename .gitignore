@@ -1,0 +1,21 @@
+# 构建产物
+build/
+out/
+cmake-build-*/
+
+# CMake 生成物
+CMakeCache.txt
+CMakeFiles/
+cmake_install.cmake
+CMakeUserPresets.json
+Makefile
+compile_commands.json
+
+# 编辑器 / LSP
+.cache/
+.vscode/
+.idea/
+*.log
+
+# 系统
+.DS_Store

@@ -12,6 +12,15 @@ cd bin
 ./YourProjectName
 ```
 
+## 运行单元测试
+测试默认关闭（`BUILD_TESTING=OFF`）；开启后会通过 `FetchContent` 自动拉取 GTest，首次配置需要联网。
+```bash
+cmake -S . -B build -DBUILD_TESTING=ON
+cmake --build build
+cd build && ctest --output-on-failure
+```
+每个模块的单元测试放在自己的 `test/` 目录下（如 `core/add/test/`），跨模块的集成测试放在顶层 `test/`。
+
 # 二、为什么使用`CMake`?
 ## 1 跨平台
 CMake能够生成适用于多种平台（如Windows、Linux、macOS等）的构建系统（例如Makefile、Visual Studio项目、Xcode项目等）。这意味着开发者只需编写一次CMake配置文件，就可以在不同的平台上构建项目，而不必为每个平台单独编写构建脚本。
@@ -39,7 +48,7 @@ CMake的模块化和配置管理特性使得项目的配置文件更容易理解
 │   │   │   └── add.cpp
 │   │   └── test
 │   │       ├── CMakeLists.txt
-│   │       └── module1_test.cpp
+│   │       └── add_test.cpp
 │   ├── CMakeLists.txt
 │   └── sub
 │       ├── CMakeLists.txt
@@ -59,7 +68,7 @@ CMake的模块化和配置管理特性使得项目的配置文件更容易理解
 │   └── main.cpp
 └── test
     ├── CMakeLists.txt
-    └── test_add.cpp
+    └── integration_test.cpp
 
 ```
 
@@ -200,7 +209,7 @@ include(FetchContent)
 FetchContent_Declare(
   googletest
   GIT_REPOSITORY https://github.com/google/googletest.git
-  GIT_TAG       main 
+  GIT_TAG       v1.17.0   # 固定 tag，不要用 main
 )
 # For Windows: Prevent overriding the parent project's compiler/linker settings
 set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
